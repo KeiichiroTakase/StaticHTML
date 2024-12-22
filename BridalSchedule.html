@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スケジュール管理</title>
+    <style>
+        /* styles.css */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1em 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .title {
+            margin: 4px 0;
+        }
+
+        .font-12 {
+            font-size: 12pt;
+        }
+
+        .font-14 {
+            font-size: 14pt;
+        }
+
+        .font-16 {
+            font-size: 16pt;
+        }
+
+        .font-18 {
+            font-size: 18pt;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .mb-16 {
+            margin-bottom: 16px;
+        }
+
+        .mtb-4 {
+            margin: 4px 0;
+        }
+
+        .width-100 {
+            width: 100%;
+        }
+
+        .text-bold {
+            font-weight: bold;
+        }
+
+        .count-down {
+            margin: 4px 0;
+            font-weight: bold;
+            font-size: 18pt;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 1em;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        main {
+            padding: 1rem 1em 1em; /* ホームセクションの上の余白を1remに戻す */
+        }
+
+        section {
+            margin-bottom: 2em;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .accordion {
+            cursor: pointer;
+            padding: 1em;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.2em;
+            transition: background-color 0.4s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accordion:hover {
+            background-color: #ddd;
+        }
+
+        .panel {
+            /* padding: 0 1em; */
+            display: block;
+            overflow: hidden;
+            transition: max-height 1s ease-out;
+        }
+
+        .icon {
+            transition: transform 0.4s ease;
+        }
+
+        .accordion.active .icon {
+            transform: rotate(90deg);
+        }
+
+        .table-container {
+            overflow: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1em;
+            min-width: 800px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+            white-space: nowrap; /* テキストの改行を防止 */
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .sticky-col {
+            position: -webkit-sticky;
+            position: sticky;
+            left: 0;
+            background-color: #fff;
+            z-index: 1;
+            border-right: 1px solid #ddd; /* 境界線を追加 */
+        }
+
+        .event {
+            cursor: pointer;
+            color: blue;
+            text-decoration: none;
+        }
+
+        .tooltip {
+            display: none;
+            position: absolute;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: white;
+            padding: 0.5em;
+            border-radius: 5px;
+            font-size: 0.9em;
+            white-space: nowrap;
+            text-align: left;
+            left: 40%;
+        }
+
+        @media (max-width: 768px) {
+            /* body {
+                padding: 0 1em;
+            } */
+
+            /* table, th, td {
+                display: block;
+                width: 100%;
+            } */
+
+            /* th, td {
+                box-sizing: border-box;
+            } */
+
+            /* th {
+                background-color: #333;
+                color: white;
+            } */
+        }
+
+        @media (max-width: 768px) {
+            /* nav ul li {
+                display: block;
+                margin: 0.5em 0;
+            } */
+
+            .tooltip {
+            left: 65%;
+        }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="title">タイトル</h1>
+        <nav>
+            <ul>
+                <li><a href="#notice">お知らせ</a></li>
+                <li><a href="#schedule">日程表</a></li>
+                <li><a href="#tasks">やること</a></li>
+                <li><a href="#updates">更新履歴</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="notice">
+            <h2 class="accordion">お知らせ <span class="icon">&#9660;</span></h2>
+            <div class="panel">
+                <p id="countdown1" class="text-center count-down"></p>
+                <p id="countdown2" class="text-center count-down"></p>
+                <ul>
+                    <li>【重要】用意に時間がかかるもの、場所・人の予約が必要なものは早めの準備を心がけましょう！</li>
+                    <li>【～年内】物件の解約連絡</li>
+                    <li>【～2025年1月5日】ウェディングドレスの希望リストアップ</li>
+                    <li>【～2025年1月中旬】新居の候補探し</li>
+                </ul>
+            </div>
+        </section>
+        <section id="schedule">
+            <h2 class="accordion">日程表 <span class="icon">&#9660;</span></h2>
+            <div class="table-container panel">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="sticky-col">年</th>
+                            <th colspan="5">2024</th>
+                            <th colspan="13">2025</th>
+                        </tr>
+                        <tr>
+                            <th class="sticky-col">月</th>
+                            <th colspan="5">12</th>
+                            <th colspan="4">1</th>
+                            <th colspan="4">2</th>
+                            <th colspan="5">3</th>
+                        </tr>
+                        <tr>
+                            <th class="sticky-col">週</th>
+                            <th>12/1</th>
+                            <th>12/8</th>
+                            <th>12/15</th>
+                            <th>12/22</th>
+                            <th>12/29</th>
+                            <th>1/5</th>
+                            <th>1/12</th>
+                            <th>1/19</th>
+                            <th>1/26</th>
+                            <th>2/2</th>
+                            <th>2/9</th>
+                            <th>2/16</th>
+                            <th>2/23</th>
+                            <th>3/1</th>
+                            <th>3/8</th>
+                            <th>3/15</th>
+                            <th>3/22</th>
+                            <th>3/29</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="sticky-col">入籍関連</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <span class="event" onmouseover="showTooltip('tooltip1215')" onmouseout="hideTooltip('tooltip1215')" onclick="toggleTooltip('tooltip1215')">済</span>
+                                <div id="tooltip1215" class="tooltip">
+                                    <p class="font-14 text-bold mtb-4">プロポーズ</p>
+                                    <span>12/16 @The Prince Park Tower Tokyo</span>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td>
+                                <span class="event" onmouseover="showTooltip('tooltip1229')" onmouseout="hideTooltip('tooltip1229')" onclick="toggleTooltip('tooltip1229')">！</span>
+                                <div id="tooltip1229" class="tooltip">
+                                    <p class="font-14 text-bold mtb-4">結婚報告(圭一郎)</p>
+                                    <span>12/30 AM? @田邉家</span>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td>
+                                <span class="event" onmouseover="showTooltip('tooltip0112')" onmouseout="hideTooltip('tooltip0112')" onclick="toggleTooltip('tooltip0112')">！</span>
+                                <div id="tooltip0112" class="tooltip">
+                                    <p class="font-14 text-bold mtb-4">結婚報告(舞衣)</p>
+                                    <span>01/12 PM @高瀬家</span>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="sticky-col">結納関連</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <span class="event" onmouseover="showTooltip('tooltip0322')" onmouseout="hideTooltip('tooltip0322')" onclick="toggleTooltip('tooltip0322')">！</span>
+                                <div id="tooltip0322" class="tooltip">
+                                    <p class="font-14 text-bold mtb-4">結納</p>
+                                    <span>03/22 10:30 (08:00?~着付け) @椿山荘</span>
+                                </div>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="sticky-col">挙式関連</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <span class="event" onmouseover="showTooltip('tooltip0105')" onmouseout="hideTooltip('tooltip0105')" onclick="toggleTooltip('tooltip0105')">！</span>
+                                <div id="tooltip0105" class="tooltip">
+                                    <p class="font-14 text-bold mtb-4">結納・前撮り衣装合わせ</p>
+                                    <span>01/05 15:00 @椿山荘B1 高見ブライダル</span>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <span class="event" onmouseover="showTooltip('tooltip0326')" onmouseout="hideTooltip('tooltip0326')" onclick="toggleTooltip('tooltip0326')">！</span>
+                                <div id="tooltip0326" class="tooltip">
+                                    <p class="font-14 text-bold mtb-4">前撮り</p>
+                                    <span>03/26 11:00 (9:00~着付け) @椿山荘</span>
+                                </div>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section id="tasks">
+            <h2 class="accordion">やること <span class="icon">&#9660;</span></h2>
+            <div class="panel">
+                <ul>
+                    <li class="mb-16">入籍関連
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>カテゴリ</th>
+                                        <th>タイトル</th>
+                                        <th>詳細</th>
+                                        <th>期限</th>
+                                        <th>担当者</th>
+                                        <th>状況</th>
+                                        <th>田邉家</th>
+                                        <th>高瀬家</th>
+                                        <th>備考</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>引っ越し</td>
+                                        <td class="text-left">解約連絡</td>
+                                        <td class="text-left">現在の物件の解約連絡を入れる ※退去の2ヵ月前に連絡する必要があるかも</td>
+                                        <td>2024年12月</td>
+                                        <td>M・K</td>
+                                        <td>確認中</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>引っ越し</td>
+                                        <td class="text-left">新居探し</td>
+                                        <td class="text-left">新居の候補を探して内見の予定を立てる</td>
+                                        <td>2024年1月中旬</td>
+                                        <td>M・K</td>
+                                        <td>検討中</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                    <li class="mb-16">結納関連
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>カテゴリ</th>
+                                        <th>タイトル</th>
+                                        <th>詳細</th>
+                                        <th>期限</th>
+                                        <th>担当者</th>
+                                        <th>状況</th>
+                                        <th>田邉家</th>
+                                        <th>高瀬家</th>
+                                        <th>備考</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>結納品</td>
+                                        <td class="text-left">お祝い返しの準備</td>
+                                        <td class="text-left">30万円程度の時計が候補</td>
+                                        <td>2025年2月</td>
+                                        <td>M・K</td>
+                                        <td>探し中</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                    <li class="mb-16">挙式関連
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>カテゴリ</th>
+                                        <th>タイトル</th>
+                                        <th>詳細</th>
+                                        <th>期限</th>
+                                        <th>担当者</th>
+                                        <th>状況</th>
+                                        <th>田邉家</th>
+                                        <th>高瀬家</th>
+                                        <th>備考</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>挙式準備</td>
+                                        <td class="text-left">招待客リスト作成</td>
+                                        <td class="text-left">大体の人数を把握する</td>
+                                        <td>2025年1月</td>
+                                        <td>M・K</td>
+                                        <td>ドラフト作成済み</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>挙式準備</td>
+                                        <td class="text-left">テーマ・コンセプトの検討</td>
+                                        <td class="text-left">挙式のテーマを決めて、動画作りなどに取り掛かれるようにする</td>
+                                        <td>2025年3月</td>
+                                        <td>M・K</td>
+                                        <td>検討中</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section id="updates">
+            <h2 class="accordion">更新履歴 <span class="icon">&#9660;</span></h2>
+            <div class="panel">
+                <p>更新履歴はこちらに表示されます。</p>
+            </div>
+        </section>
+    </main>
+</body>
+<script>
+    // scripts.js
+    document.addEventListener('DOMContentLoaded', function() {
+        var acc = document.getElementsByClassName("accordion");
+        for (var i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                var icon = this.querySelector(".icon");
+                if (panel.style.display === "none") {
+                    panel.style.display = "block";
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                    icon.style.transform = "rotate(0deg)"; // 90°回転
+                } else {
+                    panel.style.display = "none";
+                    panel.style.maxHeight = null;
+                    icon.style.transform = "rotate(-90deg)"; // 横向きの三角形
+                }
+            });
+        }
+
+        // ナビゲーションリンクのクリックでスクロール
+        var navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                var targetId = this.getAttribute('href').substring(1);
+                var targetSection = document.getElementById(targetId);
+                window.scrollTo({
+                    top: targetSection.offsetTop - document.querySelector('header').offsetHeight,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 開催までの日数を計算して表示
+        var targetDate1 = new Date('2025-03-22');
+        var targetDate2 = new Date('2025-11-22');
+        var today = new Date();
+        var timeDiff1 = targetDate1 - today;
+        var timeDiff2 = targetDate2 - today;
+        var daysRemaining1 = Math.ceil(timeDiff1 / (1000 * 60 * 60 * 24));
+        var daysRemaining2 = Math.ceil(timeDiff2 / (1000 * 60 * 60 * 24));
+        var countdownElement1 = document.getElementById('countdown1');
+        var countdownElement2 = document.getElementById('countdown2');
+
+        if (daysRemaining1 > 0) {
+            countdownElement1.textContent = `結納まで${daysRemaining1}日`;
+        } else if (daysRemaining1 === 0) {
+            countdownElement1.textContent = "本日結納です";
+        } else {
+            countdownElement1.style.display = 'none';
+        }
+
+        if (daysRemaining2 > 0) {
+            countdownElement2.textContent = `挙式まで${daysRemaining2}日`;
+        } else if (daysRemaining2 === 0) {
+            countdownElement2.textContent = "本日挙式です";
+        } else {
+            countdownElement2.style.display = 'none';
+        }
+    });
+
+    function showTooltip(id) {
+        document.getElementById(id).style.display = 'block';
+    }
+
+    function hideTooltip(id) {
+        document.getElementById(id).style.display = 'none';
+    }
+
+    function toggleTooltip(id) {
+        const tooltip = document.getElementById(id);
+        if (tooltip.style.display === 'block') {
+            tooltip.style.display = 'none';
+        } else {
+            tooltip.style.display = 'block';
+        }
+    }
+</script>
+</html>
