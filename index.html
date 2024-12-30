@@ -172,8 +172,20 @@
 
         .event {
             cursor: pointer;
-            color: blue;
+            /* color: blue; */
             text-decoration: none;
+        }
+
+        .done {
+            background-color: rgb(175, 175, 175);
+        }
+
+        .scheduled {
+            background-color: lightgreen;
+        }
+
+        .tbd {
+            background-color: yellow;
         }
 
         .tooltip {
@@ -224,7 +236,6 @@
 </head>
 <body>
     <header>
-        <h1 class="title">タイトル</h1>
         <nav>
             <ul>
                 <li><a href="#notice">お知らせ</a></li>
@@ -241,10 +252,11 @@
                 <p id="countdown1" class="text-center count-down"></p>
                 <p id="countdown2" class="text-center count-down"></p>
                 <ul>
-                    <li>【重要】用意に時間がかかるもの、場所・人の予約が必要なものは早めの準備を心がけましょう！</li>
-                    <li>【～年内】物件の解約連絡</li>
-                    <li>【～2025年1月5日】ウェディングドレスの希望リストアップ</li>
-                    <li>【～2025年1月中旬】新居の候補探し</li>
+                    <li>【重要】用意に時間がかかるもの、場所・人の予約が必要なものは早めの準備を心がけましょう</li>
+                    <li>【～年内】(完了)物件の解約連絡</li>
+                    <li>【～2025年1月5日】ウェディングドレス、振袖の希望リストアップ</li>
+                    <li>【～2025年1月中旬】新居探し、内見</li>
+                    <li>【～2025年1月】結納返しの時計決める</li>
                 </ul>
             </div>
         </section>
@@ -256,7 +268,7 @@
                         <tr>
                             <th class="sticky-col">年</th>
                             <th colspan="5">2024</th>
-                            <th colspan="13">2025</th>
+                            <th colspan="17">2025</th>
                         </tr>
                         <tr>
                             <th class="sticky-col">月</th>
@@ -264,6 +276,7 @@
                             <th colspan="4">1</th>
                             <th colspan="4">2</th>
                             <th colspan="5">3</th>
+                            <th colspan="4">4</th>
                         </tr>
                         <tr>
                             <th class="sticky-col">週</th>
@@ -280,11 +293,15 @@
                             <th>2/9</th>
                             <th>2/16</th>
                             <th>2/23</th>
-                            <th>3/1</th>
-                            <th>3/8</th>
-                            <th>3/15</th>
-                            <th>3/22</th>
-                            <th>3/29</th>
+                            <th>3/2</th>
+                            <th>3/9</th>
+                            <th>3/16</th>
+                            <th>3/23</th>
+                            <th>3/30</th>
+                            <th>4/6</th>
+                            <th>4/13</th>
+                            <th>4/20</th>
+                            <th>4/27</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -292,25 +309,27 @@
                             <td class="sticky-col">入籍関連</td>
                             <td></td>
                             <td></td>
-                            <td>
-                                <span class="event" onmouseover="showTooltip('tooltip1215')" onmouseout="hideTooltip('tooltip1215')" onclick="toggleTooltip('tooltip1215')">済</span>
+                            <td class="done">
+                                <span class="event" onmouseover="tooltipFunc('show', 'tooltip1215')" onmouseout="tooltipFunc('hide', 'tooltip1215')" onclick="tooltipFunc('toggle', 'tooltip1215')">済</span>
                                 <div id="tooltip1215" class="tooltip">
                                     <p class="font-14 text-bold mtb-4">プロポーズ</p>
                                     <span>12/16 @The Prince Park Tower Tokyo</span>
                                 </div>
                             </td>
                             <td></td>
-                            <td>
-                                <span class="event" onmouseover="showTooltip('tooltip1229')" onmouseout="hideTooltip('tooltip1229')" onclick="toggleTooltip('tooltip1229')">！</span>
+                            <td class="scheduled">
+                                <span class="event" onmouseover="tooltipFunc('show', 'tooltip1229')" onmouseout="tooltipFunc('hide', 'tooltip1229')" onclick="tooltipFunc('toggle', 'tooltip1229')">！</span>
                                 <div id="tooltip1229" class="tooltip">
                                     <p class="font-14 text-bold mtb-4">結婚報告(圭一郎)</p>
-                                    <span>12/30 AM? @田邉家</span>
+                                    <span>12/30 16:00~ @田邉家</span>
                                 </div>
                             </td>
                             <td></td>
-                            <td>
-                                <span class="event" onmouseover="showTooltip('tooltip0112')" onmouseout="hideTooltip('tooltip0112')" onclick="toggleTooltip('tooltip0112')">！</span>
+                            <td class="scheduled">
+                                <span class="event" onmouseover="tooltipFunc('show', 'tooltip0112')" onmouseout="tooltipFunc('hide', 'tooltip0112')" onclick="tooltipFunc('toggle', 'tooltip0112')">！</span>
                                 <div id="tooltip0112" class="tooltip">
+                                    <p class="font-14 text-bold mtb-4">内見</p>
+                                    <span>01/12 PM @浅草橋</span>
                                     <p class="font-14 text-bold mtb-4">結婚報告(舞衣)</p>
                                     <span>01/12 PM @高瀬家</span>
                                 </div>
@@ -319,12 +338,34 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td class="tbd">
+                                <span class="event" onmouseover="tooltipFunc('show', 'tooltip0216')" onmouseout="tooltipFunc('hide', 'tooltip0216')" onclick="tooltipFunc('toggle', 'tooltip0216')">TBD</span>
+                                <div id="tooltip0216" class="tooltip">
+                                    <p class="font-14 text-bold mtb-4">新居契約開始</p>
+                                    <span>02/16週</span>
+                                </div>
+                            </td>
+                            <td class="tbd">
+                                <span class="event" onmouseover="tooltipFunc('show', 'tooltip0223')" onmouseout="tooltipFunc('hide', 'tooltip0223')" onclick="tooltipFunc('toggle', 'tooltip0223')">TBD</span>
+                                <div id="tooltip0223" class="tooltip">
+                                    <p class="font-14 text-bold mtb-4">引っ越し</p>
+                                    <span>02/23週</span>
+                                </div>
+                            </td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
+                            <td class="tbd">
+                                <span class="event" onmouseover="tooltipFunc('show', 'tooltip0425')" onmouseout="tooltipFunc('hide', 'tooltip0425')" onclick="tooltipFunc('toggle', 'tooltip0425')">TBD</span>
+                                <div id="tooltip0425" class="tooltip">
+                                    <p class="font-14 text-bold mtb-4">入籍</p>
+                                    <span>04/25 AM</span>
+                                </div>
+                            </td>
                             <td></td>
                         </tr>
                         <tr>
@@ -334,24 +375,44 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <span class="event" onmouseover="showTooltip('tooltip0322')" onmouseout="hideTooltip('tooltip0322')" onclick="toggleTooltip('tooltip0322')">！</span>
-                                <div id="tooltip0322" class="tooltip">
-                                    <p class="font-14 text-bold mtb-4">結納</p>
-                                    <span>03/22 10:30 (08:00?~着付け) @椿山荘</span>
+                            <td class="scheduled">
+                                <span class="event" onmouseover="tooltipFunc('show', 'tooltip01051')" onmouseout="tooltipFunc('hide', 'tooltip01051')" onclick="tooltipFunc('toggle', 'tooltip01051')">！</span>
+                                <div id="tooltip01051" class="tooltip">
+                                    <p class="font-14 text-bold mtb-4">結納衣装合わせ</p>
+                                    <span>01/05 15:00~19:00 @椿山荘B1 TAKAMI BRIDAL</span>
                                 </div>
                             </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="tbd">
+                                <span class="event" onmouseover="tooltipFunc('show', 'tooltip0302')" onmouseout="tooltipFunc('hide', 'tooltip0302')" onclick="tooltipFunc('toggle', 'tooltip0302')">TBD</span>
+                                <div id="tooltip0302" class="tooltip">
+                                    <p class="font-14 text-bold mtb-4">結納事前打ち合わせ</p>
+                                    <span>03/02週 @椿山荘?</span>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td class="scheduled">
+                                <span class="event" onmouseover="tooltipFunc('show', 'tooltip0322')" onmouseout="tooltipFunc('hide', 'tooltip0322')" onclick="tooltipFunc('toggle', 'tooltip0322')">！</span>
+                                <div id="tooltip0322" class="tooltip">
+                                    <p class="font-14 text-bold mtb-4">着付け</p>
+                                    <span>03/22 08:00? @椿山荘 バンケット棟B1</span>
+                                    <p class="font-14 text-bold mtb-4">撮影</p>
+                                    <span>03/22 10:30 @椿山荘 バンケット棟B1 写真スタジオ</span>
+                                    <p class="font-14 text-bold mtb-4">結納</p>
+                                    <span>03/22 11:30 @椿山荘 錦水 羽衣</span>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                         </tr>
                         <tr>
@@ -361,11 +422,11 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td>
-                                <span class="event" onmouseover="showTooltip('tooltip0105')" onmouseout="hideTooltip('tooltip0105')" onclick="toggleTooltip('tooltip0105')">！</span>
-                                <div id="tooltip0105" class="tooltip">
-                                    <p class="font-14 text-bold mtb-4">結納・前撮り衣装合わせ</p>
-                                    <span>01/05 15:00 @椿山荘B1 高見ブライダル</span>
+                            <td class="scheduled">
+                                <span class="event" onmouseover="tooltipFunc('show', 'tooltip01052')" onmouseout="tooltipFunc('hide', 'tooltip01052')" onclick="tooltipFunc('toggle', 'tooltip01052')">！</span>
+                                <div id="tooltip01052" class="tooltip">
+                                    <p class="font-14 text-bold mtb-4">前撮り衣装合わせ</p>
+                                    <span>01/05 15:00~19:00 @椿山荘B1 TAKAMI BRIDAL</span>
                                 </div>
                             </td>
                             <td></td>
@@ -378,13 +439,19 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td>
-                                <span class="event" onmouseover="showTooltip('tooltip0326')" onmouseout="hideTooltip('tooltip0326')" onclick="toggleTooltip('tooltip0326')">！</span>
+                            <td class="scheduled">
+                                <span class="event" onmouseover="tooltipFunc('show', 'tooltip0326')" onmouseout="tooltipFunc('hide', 'tooltip0326')" onclick="tooltipFunc('toggle', 'tooltip0326')">！</span>
                                 <div id="tooltip0326" class="tooltip">
+                                    <p class="font-14 text-bold mtb-4">着付け</p>
+                                    <span>03/26 9:00 @椿山荘</span>
                                     <p class="font-14 text-bold mtb-4">前撮り</p>
-                                    <span>03/26 11:00 (9:00~着付け) @椿山荘</span>
+                                    <span>03/26 11:00 @椿山荘</span>
                                 </div>
                             </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                         </tr>
                     </tbody>
@@ -414,11 +481,13 @@
                                 <tbody>
                                     <tr>
                                         <td>引っ越し</td>
-                                        <td class="text-left">解約連絡</td>
-                                        <td class="text-left">現在の物件の解約連絡を入れる ※退去の2ヵ月前に連絡する必要があるかも</td>
+                                        <td class="text-left">解約事前通知</td>
+                                        <td class="text-left">現在の物件の解約連絡を入れる ※退去の2ヵ月前に連絡する必要があるかも
+                                            <br>→2/26解約で通知済み
+                                        </td>
                                         <td>2024年12月</td>
                                         <td>M・K</td>
-                                        <td>確認中</td>
+                                        <td>完了</td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -426,10 +495,48 @@
                                     <tr>
                                         <td>引っ越し</td>
                                         <td class="text-left">新居探し</td>
-                                        <td class="text-left">新居の候補を探して内見の予定を立てる</td>
+                                        <td class="text-left">新居の候補を探して内見の予定を立てる
+                                            <br>→アーバネックス秋葉原EASTが候補？
+                                        </td>
                                         <td>2024年1月中旬</td>
                                         <td>M・K</td>
                                         <td>検討中</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>引っ越し</td>
+                                        <td class="text-left">解約手続き</td>
+                                        <td class="text-left">住居と電気・ガス・水道の解約、インターネットの切り替えと郵便物の転送手続き
+                                        </td>
+                                        <td>2024年2月中旬</td>
+                                        <td>M・K</td>
+                                        <td>未対応</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>引っ越し</td>
+                                        <td class="text-left">住所変更</td>
+                                        <td class="text-left">諸々の住所変更、マイナンバーなどは早めに
+                                        </td>
+                                        <td>2024年3月上旬</td>
+                                        <td>M・K</td>
+                                        <td>未対応</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>入籍</td>
+                                        <td class="text-left">婚姻届の準備</td>
+                                        <td class="text-left">結納までに婚姻届を用意する(WebからDLで良い)、記入できるところは事前に記入、書き損じを考慮して3部ほど用意
+                                        </td>
+                                        <td>2024年3月上旬</td>
+                                        <td>M・K</td>
+                                        <td>未対応</td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -456,12 +563,78 @@
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <td>衣装</td>
+                                        <td class="text-left">振袖の希望を事前に連絡する</td>
+                                        <td class="text-left">色、デザインなど
+                                            <br>→赤色希望は連絡済み</td>
+                                        <td>2025年1月5日</td>
+                                        <td>M</td>
+                                        <td>検討中</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
                                         <td>結納品</td>
                                         <td class="text-left">お祝い返しの準備</td>
-                                        <td class="text-left">30万円程度の時計が候補</td>
+                                        <td class="text-left">30万円程度の時計が候補
+                                            <br>→<a href="https://www.seikowatches.com/jp-ja/products/astron/sbxc151">SBXC151</a>、
+                                            <a href="https://www.seikowatches.com/jp-ja/products/astron/sbxc159">SBXC159</a>、
+                                            <a href="https://www.seikowatches.com/jp-ja/products/astron/sbxc163">SBXC163</a>、
+                                            <a href="https://www.seikowatches.com/jp-ja/products/prospex/sbed009">SBED009</a>
+                                        </td>
                                         <td>2025年2月</td>
                                         <td>M・K</td>
-                                        <td>探し中</td>
+                                        <td>検討中</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>結納の催し</td>
+                                        <td class="text-left">結納しおり</td>
+                                        <td class="text-left">自作を前提に内容、レイアウトを決める
+                                        </td>
+                                        <td>2025年2月</td>
+                                        <td>M・K</td>
+                                        <td>検討中</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>結納の催し</td>
+                                        <td class="text-left">その他</td>
+                                        <td class="text-left">結納でやりたいことがあれば企画・準備する(例：婚姻届を万年筆で記入する、色紙に記念の一筆を書くなど)
+                                        </td>
+                                        <td>2025年2月</td>
+                                        <td>M・K</td>
+                                        <td>検討中</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>結納</td>
+                                        <td class="text-left">事前確認</td>
+                                        <td class="text-left">椿山荘との事前確認に向けて整理
+                                            <ul>
+                                                <li>当日の流れ(着付け、撮影、結納それぞれの時間・場所・持ち物)</li>
+                                                <li>席次と配置</li>
+                                                <li>手土産(任意)</li>
+                                                <li>(高瀬家)結納金100万円 ※2週間前までに八木さんへ連絡(未)</li>
+                                                <li>(高瀬家)結納品九品目セット(たる料1万円)</li>
+                                                <li>(高瀬家)結納の品(婚約指輪)</li>
+                                                <li>(田邉家)受書セット、記念品台(時計用)</li>
+                                                <li>(田邉家)結納返しの品(時計) ※それらしいラッピング</li>
+                                                <li>当日の会計は圭一郎が一括払い</li>
+                                                <li>当日の服装は舞衣振袖、圭一郎ダークスーツ、他は洋装</li>
+                                                <li>アルバムは「縁」(スタジオ+庭園、2冊+増刷1冊)、圭一郎の新居へ送付</li>
+                                            </ul>
+                                        </td>
+                                        <td>2025年2月</td>
+                                        <td>M・K</td>
+                                        <td>検討中</td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -488,10 +661,35 @@
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <td>前撮り</td>
+                                        <td class="text-left">前撮り用ドレスの希望を事前に連絡する</td>
+                                        <td class="text-left">色、デザインなど
+                                            <br>→ボリュームが少ないタイプ、シルク系生地希望は連絡済み</td>
+                                        <td>2025年1月5日</td>
+                                        <td>M</td>
+                                        <td>検討中</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
                                         <td>挙式準備</td>
                                         <td class="text-left">招待客リスト作成</td>
-                                        <td class="text-left">大体の人数を把握する</td>
-                                        <td>2025年1月</td>
+                                        <td class="text-left">大体の人数を把握する
+                                            <ul>
+                                                <li>舞衣
+                                                    <br>親族：12
+                                                    <br>職場：11
+                                                    <br>友人：17(サークル同期含まない)
+                                                </li>
+                                                <li>圭一郎
+                                                    <br>親族：8(両親2、父兄弟4、母兄弟2)
+                                                    <br>職場：9
+                                                    <br>友人：22(サークル同期含む)
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td>2025年3月</td>
                                         <td>M・K</td>
                                         <td>ドラフト作成済み</td>
                                         <td></td>
@@ -501,7 +699,18 @@
                                     <tr>
                                         <td>挙式準備</td>
                                         <td class="text-left">テーマ・コンセプトの検討</td>
-                                        <td class="text-left">挙式のテーマを決めて、動画作りなどに取り掛かれるようにする</td>
+                                        <td class="text-left">挙式のテーマを決めて、動画作成などに取り掛かれるようにする</td>
+                                        <td>2025年3月</td>
+                                        <td>M・K</td>
+                                        <td>検討中</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>挙式準備</td>
+                                        <td class="text-left">衣装のリサーチ</td>
+                                        <td class="text-left">レンタル or 身内のものを使用する</td>
                                         <td>2025年3月</td>
                                         <td>M・K</td>
                                         <td>検討中</td>
@@ -519,7 +728,9 @@
         <section id="updates">
             <h2 class="accordion">更新履歴 <span class="icon">&#9660;</span></h2>
             <div class="panel">
-                <p>更新履歴はこちらに表示されます。</p>
+                <ul>
+                    <li>2024/12/30 初版作成</li>
+                </ul>
             </div>
         </section>
     </main>
@@ -571,7 +782,7 @@
         var countdownElement2 = document.getElementById('countdown2');
 
         if (daysRemaining1 > 0) {
-            countdownElement1.textContent = `結納まで${daysRemaining1}日`;
+            countdownElement1.textContent = `結納まであと${daysRemaining1}日`;
         } else if (daysRemaining1 === 0) {
             countdownElement1.textContent = "本日結納です";
         } else {
@@ -579,29 +790,31 @@
         }
 
         if (daysRemaining2 > 0) {
-            countdownElement2.textContent = `挙式まで${daysRemaining2}日`;
+            countdownElement2.textContent = `結婚式まであと${daysRemaining2}日`;
         } else if (daysRemaining2 === 0) {
-            countdownElement2.textContent = "本日挙式です";
+            countdownElement2.textContent = "本日結婚式です";
         } else {
             countdownElement2.style.display = 'none';
         }
     });
 
-    function showTooltip(id) {
-        document.getElementById(id).style.display = 'block';
-    }
-
-    function hideTooltip(id) {
-        document.getElementById(id).style.display = 'none';
-    }
-
-    function toggleTooltip(id) {
+    function tooltipFunc(option, id) {
         const tooltip = document.getElementById(id);
-        if (tooltip.style.display === 'block') {
-            tooltip.style.display = 'none';
-        } else {
+        if (option === "show") {
+            console.log('show');
             tooltip.style.display = 'block';
+        } else if (option === "hide") {
+            console.log('hide');
+            tooltip.style.display = 'none';
+        } else if (option === "toggle") {
+            console.log('toggle');
+            if (tooltip.style.display === 'none') {
+                tooltip.style.display = 'block';
+            } else {
+                tooltip.style.display = 'none';
+            }
         }
     }
+
 </script>
 </html>
