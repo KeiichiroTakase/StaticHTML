@@ -50,6 +50,10 @@
             text-align: left;
         }
 
+        .mb-4 {
+            margin-bottom: 4px;
+        }
+
         .mb-16 {
             margin-bottom: 16px;
         }
@@ -64,6 +68,10 @@
 
         .text-bold {
             font-weight: bold;
+        }
+
+        .img {
+            width: 100px;
         }
 
         .count-down {
@@ -243,6 +251,7 @@
                 <li><a href="#notice">お知らせ</a></li>
                 <li><a href="#schedule">日程表</a></li>
                 <li><a href="#tasks">やること</a></li>
+                <li><a href="#contacts">連絡先</a></li>
                 <li><a href="#updates">更新履歴</a></li>
             </ul>
         </nav>
@@ -311,24 +320,24 @@
                             <td class="sticky-col">入籍関連</td>
                             <td></td>
                             <td></td>
-                            <td class="done">
-                                <span class="event" onmouseover="tooltipFunc('show', 'tooltip1215')" onmouseout="tooltipFunc('hide', 'tooltip1215')" onclick="tooltipFunc('toggle', 'tooltip1215')">済</span>
+                            <td class="event done" onclick="tooltipFunc('toggle', 'tooltip1215')">
+                                <span>済</span>
                                 <div id="tooltip1215" class="tooltip">
                                     <p class="font-14 text-bold mtb-4">プロポーズ</p>
                                     <span>12/16 @The Prince Park Tower Tokyo</span>
                                 </div>
                             </td>
                             <td></td>
-                            <td class="scheduled">
-                                <span class="event" onmouseover="tooltipFunc('show', 'tooltip1229')" onmouseout="tooltipFunc('hide', 'tooltip1229')" onclick="tooltipFunc('toggle', 'tooltip1229')">！</span>
+                            <td class="event done"  onclick="tooltipFunc('toggle', 'tooltip1229')">
+                                <span>済</span>
                                 <div id="tooltip1229" class="tooltip">
                                     <p class="font-14 text-bold mtb-4">結婚報告(圭一郎)</p>
                                     <span>12/30 16:00~ @田邉家</span>
                                 </div>
                             </td>
                             <td></td>
-                            <td class="scheduled">
-                                <span class="event" onmouseover="tooltipFunc('show', 'tooltip0112')" onmouseout="tooltipFunc('hide', 'tooltip0112')" onclick="tooltipFunc('toggle', 'tooltip0112')">！</span>
+                            <td class="event scheduled" onclick="tooltipFunc('toggle', 'tooltip0112')">
+                                <span>！</span>
                                 <div id="tooltip0112" class="tooltip">
                                     <p class="font-14 text-bold mtb-4">内見</p>
                                     <span>01/12 PM @浅草橋</span>
@@ -340,15 +349,15 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td class="tbd">
-                                <span class="event" onmouseover="tooltipFunc('show', 'tooltip0216')" onmouseout="tooltipFunc('hide', 'tooltip0216')" onclick="tooltipFunc('toggle', 'tooltip0216')">TBD</span>
+                            <td class="event tbd" onclick="tooltipFunc('toggle', 'tooltip0216')">
+                                <span>TBD</span>
                                 <div id="tooltip0216" class="tooltip">
                                     <p class="font-14 text-bold mtb-4">新居契約開始</p>
                                     <span>02/16週</span>
                                 </div>
                             </td>
-                            <td class="tbd">
-                                <span class="event" onmouseover="tooltipFunc('show', 'tooltip0223')" onmouseout="tooltipFunc('hide', 'tooltip0223')" onclick="tooltipFunc('toggle', 'tooltip0223')">TBD</span>
+                            <td class="event tbd" onclick="tooltipFunc('toggle', 'tooltip0223')">
+                                <span>TBD</span>
                                 <div id="tooltip0223" class="tooltip">
                                     <p class="font-14 text-bold mtb-4">引っ越し</p>
                                     <span>02/23週</span>
@@ -361,8 +370,8 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td class="tbd">
-                                <span class="event" onmouseover="tooltipFunc('show', 'tooltip0425')" onmouseout="tooltipFunc('hide', 'tooltip0425')" onclick="tooltipFunc('toggle', 'tooltip0425')">TBD</span>
+                            <td class="event tbd" onclick="tooltipFunc('toggle', 'tooltip0425')">
+                                <span>TBD</span>
                                 <div id="tooltip0425" class="tooltip">
                                     <p class="font-14 text-bold mtb-4">入籍</p>
                                     <span>04/25 AM</span>
@@ -377,8 +386,8 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td class="scheduled">
-                                <span class="event" onmouseover="tooltipFunc('show', 'tooltip01051')" onmouseout="tooltipFunc('hide', 'tooltip01051')" onclick="tooltipFunc('toggle', 'tooltip01051')">！</span>
+                            <td class="event scheduled" onclick="tooltipFunc('toggle', 'tooltip01051')">
+                                <span>！</span>
                                 <div id="tooltip01051" class="tooltip">
                                     <p class="font-14 text-bold mtb-4">結納衣装合わせ</p>
                                     <span>01/05 15:00~19:00 @椿山荘B1 TAKAMI BRIDAL</span>
@@ -391,16 +400,16 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td class="tbd">
-                                <span class="event" onmouseover="tooltipFunc('show', 'tooltip0302')" onmouseout="tooltipFunc('hide', 'tooltip0302')" onclick="tooltipFunc('toggle', 'tooltip0302')">TBD</span>
+                            <td class="event tbd" onclick="tooltipFunc('toggle', 'tooltip0302')">
+                                <span>TBD</span>
                                 <div id="tooltip0302" class="tooltip">
                                     <p class="font-14 text-bold mtb-4">結納事前打ち合わせ</p>
                                     <span>03/02週 @椿山荘?</span>
                                 </div>
                             </td>
                             <td></td>
-                            <td class="scheduled">
-                                <span class="event" onmouseover="tooltipFunc('show', 'tooltip0322')" onmouseout="tooltipFunc('hide', 'tooltip0322')" onclick="tooltipFunc('toggle', 'tooltip0322')">！</span>
+                            <td class="event scheduled" onclick="tooltipFunc('toggle', 'tooltip0322')">
+                                <span>！</span>
                                 <div id="tooltip0322" class="tooltip">
                                     <p class="font-14 text-bold mtb-4">着付け</p>
                                     <span>03/22 08:00? @椿山荘 バンケット棟B1</span>
@@ -424,8 +433,8 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td class="scheduled">
-                                <span class="event" onmouseover="tooltipFunc('show', 'tooltip01052')" onmouseout="tooltipFunc('hide', 'tooltip01052')" onclick="tooltipFunc('toggle', 'tooltip01052')">！</span>
+                            <td class="event scheduled" onclick="tooltipFunc('toggle', 'tooltip01052')">
+                                <span>！</span>
                                 <div id="tooltip01052" class="tooltip">
                                     <p class="font-14 text-bold mtb-4">前撮り衣装合わせ</p>
                                     <span>01/05 15:00~19:00 @椿山荘B1 TAKAMI BRIDAL</span>
@@ -441,8 +450,8 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td class="scheduled">
-                                <span class="event" onmouseover="tooltipFunc('show', 'tooltip0326')" onmouseout="tooltipFunc('hide', 'tooltip0326')" onclick="tooltipFunc('toggle', 'tooltip0326')">！</span>
+                            <td class="event scheduled" onclick="tooltipFunc('toggle', 'tooltip0326')">
+                                <span>！</span>
                                 <div id="tooltip0326" class="tooltip">
                                     <p class="font-14 text-bold mtb-4">着付け</p>
                                     <span>03/26 9:00 @椿山荘</span>
@@ -727,11 +736,24 @@
                 </ul>
             </div>
         </section>
+        <section id="contacts">
+            <h2 class="accordion">連絡先 <span class="icon">&#9660;</span></h2>
+            <div class="panel">
+                <ul>
+                    <li>圭一郎
+                        <br>Tel: 090-1424-0425
+                        <br>E-Mail: takakei0425@gmail.com
+                        <br>LINE: <img src="./imgs/line_keiichiro.jpg" class="img">
+                    </li>
+                </ul>
+            </div>
+        </section>
         <section id="updates">
             <h2 class="accordion">更新履歴 <span class="icon">&#9660;</span></h2>
             <div class="panel">
                 <ul>
                     <li>2024/12/30 初版作成</li>
+                    <li>2024/12/31 連絡先追加</li>
                 </ul>
             </div>
         </section>
@@ -802,15 +824,17 @@
 
     function tooltipFunc(option, id) {
         const tooltip = document.getElementById(id);
+        const tooltips = document.getElementsByClassName('tooltip');
         if (option === "show") {
             tooltip.style.display = 'block';
         } else if (option === "hide") {
             tooltip.style.display = 'none';
         } else if (option === "toggle") {
-            if (tooltip.style.display === 'none') {
-                tooltip.style.display = 'block';
-            } else {
+            if (tooltip.style.display === 'block') {
                 tooltip.style.display = 'none';
+            } else {
+                Array.from(tooltips).forEach((el) => el.style.display = 'none');
+                tooltip.style.display = 'block';
             }
         }
     }
